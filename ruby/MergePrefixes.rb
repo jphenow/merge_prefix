@@ -1,31 +1,29 @@
+#!/usr/bin/env ruby
 # Little application that uses a Trie datatype to
 # merge a list of source words with prefixes:
 #   Words with accepting prefixes
+#   Prefixes without accepting words
 require File.expand_path('../Trie.rb', __FILE__)
 
-# Source strings
-sources = ['Bash', 'cplusplus', 'java',  'javascript', 'php', 'python', 'ruby']
-#sources = Array.new
-
-# Prefix strings
-prefixes = ['ab', 'ba', 'bu', 'Jav', 'ph', 'ru', 'ze']
-#prefixes = Array.new
-
 def fileList(dir, array)
-  begin
-    file = File.new(dir, "r")
-    while (line = file.gets)
-      array << line
-    end
-    file.close
-  rescue => err
-    puts "Exception: #{err}"
-    err
+  file = File.new(dir, "r")
+  while (line = file.gets)
+    array << line
   end
 end
 
-#fileList('../lists/sources.list', sources)
-#fileList('../lists/prefixes.list', prefixes)
+# Source strings
+#sources = ['Bash', 'cplusplus', 'java',  'javascript', 'php', 'python', 'ruby']
+sources = Array.new
+
+# Prefix strings
+#prefixes = ['ab', 'ba', 'bu', 'Jav', 'ph', 'ru', 'ze']
+prefixes = Array.new
+
+fileList("../lists/sources.list", sources)
+fileList("../lists/prefixes.list", prefixes)
+puts sources[0].encoding
+puts prefixes[0].encoding
 
 # Our ending list
 final = Array.new

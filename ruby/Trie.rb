@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby -w
 # Simple Trie structure for quickly finding prefix matches
 # against a string
 class Trie
