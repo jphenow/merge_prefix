@@ -1,8 +1,13 @@
+# Simple Trie structure for quickly finding prefix matches
+# against a string
 class Trie
+
+  # Create the main hash
   def initialize()
     @trie = Hash.new()
   end
 
+  # Check of prefix exists within string Trie setup to handle
   def exists?(s)
     final = true
     index = @trie
@@ -16,6 +21,7 @@ class Trie
     return true
   end
 
+  # Build Trie based on string
   def prepare(s)
     index = @trie
     s.each_char do |c|

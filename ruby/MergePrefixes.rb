@@ -3,39 +3,50 @@
 #   Words with accepting prefixes
 require File.expand_path('../Trie.rb', __FILE__)
 
+# Source strings
 sources = ['bash', 'cplusplus', 'java',  'javascript', 'php', 'python', 'ruby']
-prefixes = ['ba', 'bu', 'jav', 'ph', 'ru']
 
+# Prefix strings
+prefixes = ['ab', 'ba', 'bu', 'jav', 'ph', 'ru', 'ze']
+
+# Our ending list
 final = Array.new
 
+# Simple variable to 'cache' our last match and keep checking
+# for similar matches before moving on to a new prefix
+still_testing = nil
+
+# Loop that cycles sources, sets up Trie for each source
+# then checks for matching prefixes. On the first find of
+# prefix we will stop, put the unmatching prefixes in the
+# final list then continue checking our working prefix until
+# we toss it. Continue this loop until we can print results
 sources.each do |source|
-  source_dump = Array.new
   t = Trie.new
   t.prepare source
-  prefixes.each do |pre|
-    if t.exists? pre
-      source_dump.each do |g|
-        trash = Trie.new
-        trash.prepare final[-1]
-        if g != pre and not trash.exists? g
-          final << g
-          prefixes.delete g
+  if still_testing and t.exists? still_testing
+    final << source
+    next
+  else
+    prefixes.each do |pre|
+      if t.exists? pre
+        i = prefixes.index pre
+        still_testing = pre
+        if i > 0
+          berid = prefixes[0..i-1]
+          final = final | berid
+          prefixes = prefixes - berid
         end
-      end
-      final << source
-      break
-    else
-      final.each do |f|
-        trash = Trie.new
-        trash.prepare f
-        if trash.exists? pre
-          prefixes.delete pre
-        else
-          source_dump << pre
-        end
+        prefixes.delete pre
+        final << source
+        break
       end
     end
   end
+end
+
+if prefixes.length > 0
+  final = final | prefixes
 end
 
 puts final
