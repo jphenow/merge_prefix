@@ -1,7 +1,10 @@
 # Merge prefixes with matching words!
 
 These implementations will do a filtered merge, given two lists:
-One of **sorted** words, one of **sorted** shorter-length prefixes.
+
+* One of **sorted** words
+* Oone of **sorted** shorter-length prefixes
+
 Elements in either list will only make it into the final merged
 list if:
 
