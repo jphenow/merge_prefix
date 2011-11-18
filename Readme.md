@@ -38,5 +38,7 @@ With their implementations residing in their respective directories.
 # Author
 
 Jon Phenow
+
 http://jphenow.com
+
 Contact me if you have any questions or concerns.
