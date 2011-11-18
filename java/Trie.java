@@ -38,12 +38,18 @@ public class Trie {
         char[] chars = data.toCharArray();
         Trie current = this;
         for(char c: chars) {
-            if (!current.paths.containsKey(c)) {
-                return false;
+            char up = Character.toUpperCase(c);
+            char low = Character.toLowerCase(c);
+            if( current != null){
+                if(!current.paths.containsKey(low)) {
+                    current = (Trie) current.paths.get(up);
+                }
+                else if(!current.paths.containsKey(up)) {
+                    current = (Trie) current.paths.get(low);
+                }
+                else return false;
             }
-            else {
-                current = (Trie) current.paths.get(c);
-            }
+            else return false;
         }
         return true;
     }

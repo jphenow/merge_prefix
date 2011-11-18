@@ -76,7 +76,7 @@ public class MergePrefixes {
 
             // Get the object of DataInputStream
             DataInputStream in = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            BufferedReader br = new BufferedReader(new InputStreamReader(in, "ASCII"));
             String strLine;
 
             //Read File Line By Line
