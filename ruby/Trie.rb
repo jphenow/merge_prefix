@@ -12,10 +12,26 @@ class Trie
     final = true
     index = @trie
     s.each_char do |c|
-      current = c
-      index = index[current]
-      if index == nil
-        return false
+      tindex = index.dup
+      r = 0
+      tindex = tindex[c]
+      if tindex == nil
+        r += 1
+      end
+
+      jindex = index.dup
+      current = c.swapcase
+      jindex = jindex[current]
+      if jindex == nil
+        r += 2
+      end
+
+      if r == 1
+        index = jindex
+      elsif r == 2
+        index = tindex
+      else
+          return false
       end
     end
     return true

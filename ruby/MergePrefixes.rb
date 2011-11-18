@@ -4,10 +4,28 @@
 require File.expand_path('../Trie.rb', __FILE__)
 
 # Source strings
-sources = ['bash', 'cplusplus', 'java',  'javascript', 'php', 'python', 'ruby']
+sources = ['Bash', 'cplusplus', 'java',  'javascript', 'php', 'python', 'ruby']
+#sources = Array.new
 
 # Prefix strings
-prefixes = ['ab', 'ba', 'bu', 'jav', 'ph', 'ru', 'ze']
+prefixes = ['ab', 'ba', 'bu', 'Jav', 'ph', 'ru', 'ze']
+#prefixes = Array.new
+
+def fileList(dir, array)
+  begin
+    file = File.new(dir, "r")
+    while (line = file.gets)
+      array << line
+    end
+    file.close
+  rescue => err
+    puts "Exception: #{err}"
+    err
+  end
+end
+
+#fileList('../lists/sources.list', sources)
+#fileList('../lists/prefixes.list', prefixes)
 
 # Our ending list
 final = Array.new
