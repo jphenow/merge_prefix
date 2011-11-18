@@ -21,6 +21,11 @@ public class MergePrefixes {
         ret = new ArrayList<String>();
     }
 
+    /** 
+     * Constructor that simplifies setup for grabbing list files
+     * @param s String that represents path to sources.list
+     * @param p String that represents path to prefixes.list
+     * */
     public MergePrefixes(String s, String p){
         sources = new ArrayList<String>();
         prefixes = new ArrayList<String>();
@@ -67,6 +72,11 @@ public class MergePrefixes {
         System.out.println(ret);
     }
 
+    /** 
+     * Grab contents, by line, of some files
+     * @param filepath String represents path to file we're loading into array
+     * @param list List object we're placing our results in
+     * */
     private void listFile(String filepath, ArrayList list){
         try{
             // Open the file that is the first
@@ -92,6 +102,10 @@ public class MergePrefixes {
         }
     }
 
+    /** 
+     * Main, so we run the basic setup with the files in lists/
+     * and output our results. args do nothing here.
+     * */
     public static void main(String[] args){
         MergePrefixes mg = new MergePrefixes("../lists/sources.list", "../lists/prefixes.list");
         mg.run();
