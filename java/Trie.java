@@ -1,42 +1,58 @@
-package MergePrefix;
 import java.util.*;
 
 public class Trie {
 
-    private Map paths=new HashMap();
+    public Map paths=new HashMap();
     private boolean isWord=false;
 
-    public void insert(String data) {
-        if (data==null) {
+    public Trie(String data){
+        this.insert(data);
+    }
+
+    public Trie(){
+    }
+
+    public void insert(String data){
+        if (data == null) {
             return;
         }
-        byte [] bytes=data.getBytes();
-        Trie current=this;
-        for (byte b: bytes) {
-            if (!current.paths.containsKey(b))  {
-                Trie next=new Trie();
-                current.paths.put(b, next);
-                current=next;
-            } else {
-                current=current.paths.get(b);
+        char[] chars = data.toCharArray();
+        Trie current = this;
+        for(char c: chars) {
+            if(!current.paths.containsKey(c))  {
+                Trie next = new Trie();
+                current.paths.put(c, (Object) next);
+                current = next;
+            }
+            else {
+                current = (Trie) current.paths.get(c);
             }
         }
-        current.isWord=true;
+        current.setIsWord(true);
     }
 
     public boolean contains(String data) {
-        if (data==null) {
+        if(data == null) {
             return false;
         }
-        byte [] bytes=data.getBytes();
-        Trie current=this;
-        for (byte b: bytes) {
-            if (!current.paths.containsKey(b))  {
+        char[] chars = data.toCharArray();
+        Trie current = this;
+        for(char c: chars) {
+            if (!current.paths.containsKey(c)) {
                 return false;
-            } else {
-                current=current.paths.get(b);
+            }
+            else {
+                current = (Trie) current.paths.get(c);
             }
         }
-        return current.isWord;
+        return true;
+    }
+
+    public boolean getIsWord(){
+        return this.isWord;
+    }
+
+    public void setIsWord(boolean b){
+        this.isWord = b;
     }
 }
