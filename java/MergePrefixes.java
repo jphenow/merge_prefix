@@ -1,44 +1,42 @@
+import java.util.*;
+import java.io.*;
+
 /* Little application that uses a Trie datatype to
  * merge a list of source words with prefixes:
  * Words with accepting prefixes
  */
-import java.util.*;
-
 public class MergePrefixes {
     private ArrayList<String> sources, prefixes, ret;
+
     // Simple variable to 'cache' our last match and keep checking
     // for similar matches before moving on to a new prefix
     private String still_testing = null;
 
+    /**
+     * Initalizer, sets up necessary lists
+     * */
     public MergePrefixes(){
         sources = new ArrayList<String>();
         prefixes = new ArrayList<String>();
         ret = new ArrayList<String>();
-
-        // Source strings
-        sources.add("bash");
-        sources.add("cplusplus");
-        sources.add("java");
-        sources.add("javascript");
-        sources.add("php");
-        sources.add("python");
-        sources.add("ruby");
-
-        // Prefix strings
-        prefixes.add("ab");
-        prefixes.add("ba");
-        prefixes.add("bu");
-        prefixes.add("jav");
-        prefixes.add("ph");
-        prefixes.add("ru");
-        prefixes.add("ze");
     }
 
-    // Loop that cycles sources, sets up Trie for each source
-    // then checks for matching prefixes. On the first find of
-    // prefix we will stop, put the unmatching prefixes in the
-    // ret list then continue checking our working prefix until
-    // we toss it. Continue this loop until we can print results
+    public MergePrefixes(String s, String p){
+        sources = new ArrayList<String>();
+        prefixes = new ArrayList<String>();
+        ret = new ArrayList<String>();
+
+        listFile(s, sources);
+        listFile(p, prefixes);
+    }
+
+    /**
+     * Loop that cycles sources, sets up Trie for each source
+     * then checks for matching prefixes. On the first find of
+     * prefix we will stop, put the unmatching prefixes in the
+     * ret list then continue checking our working prefix until
+     * we toss it. Continue this loop until we can print results
+     */
     public void run(){
         for(String source : sources) {
             Trie t = new Trie(source);
@@ -69,8 +67,33 @@ public class MergePrefixes {
         System.out.println(ret);
     }
 
+    private void listFile(String filepath, ArrayList list){
+        try{
+            // Open the file that is the first
+            // command line parameter
+            FileInputStream fstream = new
+            FileInputStream(filepath);
+
+            // Get the object of DataInputStream
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String strLine;
+
+            //Read File Line By Line
+            while ((strLine = br.readLine()) != null)   {
+                // Print the content on the console
+                list.add(strLine);
+            }
+            //Close the input stream
+            in.close();
+        }
+        catch (Exception e){
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args){
-        MergePrefixes mg = new MergePrefixes();
+        MergePrefixes mg = new MergePrefixes("../lists/sources.list", "../lists/prefixes.list");
         mg.run();
     }
 }
