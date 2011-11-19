@@ -13,15 +13,15 @@ def fileList(dir, array)
 end
 
 # Source strings
-sources = ['Bash', 'cplusplus', 'java',  'javascript', 'php', 'python', 'ruby']
-#sources = Array.new
+#sources = ['Bash', 'cplusplus', 'java',  'javascript', 'php', 'python', 'ruby']
+sources = Array.new
 
 # Prefix strings
-prefixes = ['ab', 'ba', 'bu', 'Jav', 'ph', 'ru', 'ze']
-#prefixes = Array.new
+#prefixes = ['ab', 'ba', 'bu', 'Jav', 'ph', 'ru', 'ze']
+prefixes = Array.new
 
-#fileList("../lists/sources.list", sources)
-#fileList("../lists/prefixes.list", prefixes)
+fileList("../lists/sources.list", sources)
+fileList("../lists/prefixes.list", prefixes)
 
 # Our ending list
 final = Array.new
