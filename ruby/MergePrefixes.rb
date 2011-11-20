@@ -5,23 +5,15 @@
 #   Prefixes without accepting words
 require File.expand_path('../Trie.rb', __FILE__)
 
-def fileList(dir, array)
-  file = File.new(dir, "r")
-  while (line = file.gets)
-    array << line
-  end
+# Save some repetition with working on our two list files
+def file_list(dir)
+  array = Array.new
+  array += File.readlines(dir).map(&:chomp)
 end
 
-# Source strings
-#sources = ['Bash', 'cplusplus', 'java',  'javascript', 'php', 'python', 'ruby']
-sources = Array.new
-
-# Prefix strings
-#prefixes = ['ab', 'ba', 'bu', 'Jav', 'ph', 'ru', 'ze']
-prefixes = Array.new
-
-fileList("../lists/sources.list", sources)
-fileList("../lists/prefixes.list", prefixes)
+# Our files that conatin source words and a prefixes
+sources = file_list('../lists/sources.list')
+prefixes = file_list('../lists/prefixes.list')
 
 # Our ending list
 final = Array.new
